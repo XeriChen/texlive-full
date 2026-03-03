@@ -57,11 +57,11 @@ services:
   base:
     image: ${REGISTRY_AND_USER}/texlive-full:base
     build:
-      context: ./texlive/base
+      context: ./texlive/Base
       dockerfile: Dockerfile
   
   slim:
     image: ${REGISTRY_AND_USER}/texlive-full:slim.1
     build:
-      context: ./texlive/slim
+      context: ./texlive/Slim
       dockerfile: Dockerfile
