@@ -21,7 +21,7 @@ on:
 
 env:
   DOCKER_REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository_owner }}/texlive-full
+  IMAGE_NAME: ${{ toLower(github.repository_owner) }}/texlive-full
 
 jobs:
   prepare:
