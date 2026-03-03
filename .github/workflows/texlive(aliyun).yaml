@@ -1,24 +1,71 @@
 name: Build texlive-full(aliyun)
 
 on:
-  # push:
-  #   branches:
-  #     - dev
+  push:
+    branches:
+      - main
+    paths:
+      - 'texlive/2020/**'
+      - 'texlive/2021/**'
+      - 'texlive/2022/**'
+      - 'texlive/2023/**'
+      - 'texlive/2024/**'
+      - 'texlive/Test/**'
   workflow_dispatch:
+    inputs:
+      tex-version:
+        description: 'TeXLive version to build (e.g. "2024", comma-separated for multiple, or "all")'
+        required: false
+        default: 'all'
 
 env:
   DOCKER_REGISTRY: registry.cn-hongkong.aliyuncs.com
   IMAGE_NAME: ayaka-notes/texlive-full
-  # IMAGE_TAG: base
 
 jobs:
-  build-push-image:
+  prepare:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - name: 'Checkout GitHub Action'
+        uses: actions/checkout@main
+        with:
+          fetch-depth: 2
+
+      - name: Determine versions to build
+        id: set-matrix
+        run: |
+          ALL='["2020","2021","2022","2023","2024","Test"]'
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            INPUT="${{ inputs.tex-version }}"
+            if [ -z "$INPUT" ] || [ "$INPUT" = "all" ]; then
+              echo "matrix=$ALL" >> "$GITHUB_OUTPUT"
+            else
+              VERSIONS=$(echo "$INPUT" | tr ',' '\n' | sed 's/^ *//;s/ *$//' | jq -R . | jq -sc .)
+              echo "matrix=$VERSIONS" >> "$GITHUB_OUTPUT"
+            fi
+          else
+            CHANGED=$(git diff --name-only HEAD~1 HEAD | grep '^texlive/' | cut -d'/' -f2 | sort -u | grep -E '^([0-9]{4}|Test)$' | jq -R . | jq -sc .)
+            if [ -z "$CHANGED" ] || [ "$CHANGED" = "[]" ]; then
+              echo "matrix=$ALL" >> "$GITHUB_OUTPUT"
+            else
+              echo "matrix=$CHANGED" >> "$GITHUB_OUTPUT"
+            fi
+          fi
+
+  build-push-image:
+    needs: prepare
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
     strategy:
       fail-fast: false
       max-parallel: 8
       matrix:
-        tex-version: ["2020", "2021", "2022", "2023", "2024", "Test"]
+        tex-version: ${{ fromJson(needs.prepare.outputs.matrix) }}
     steps:
       - name: 'Checkout GitHub Action'
         uses: actions/checkout@main
