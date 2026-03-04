@@ -4,7 +4,7 @@
 
 # Use base image, see texlive/base
 # -----------------------------------
-FROM ghcr.io/XeriChen/texlive-full:base
+FROM ghcr.io/xerichen/texlive-full:base
 
 # LABEL
 # -----------------------------------
