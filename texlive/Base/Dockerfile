@@ -1,12 +1,12 @@
 # ---------------------------------------------
-# Overleaf TexLive Base (ayaka-notes/overleaf)
+# Overleaf TexLive Base (XeriChen/texlive-full)
 # ---------------------------------------------
 
 # ---------------------------------------------
 # How to pull? 
-# $ docker pull ghcr.io/ayaka-notes/texlive-full:base
+# $ docker pull ghcr.io/XeriChen/texlive-full:base
 # How to build?
-# $ docker build -t ghcr.io/ayaka-notes/texlive-full:base ./texlive/Base
+# $ docker build -t ghcr.io/XeriChen/texlive-full:base ./texlive/Base
 # ---------------------------------------------
 
 # This Dockerfile is used to build texlive-full:base
@@ -18,10 +18,10 @@ FROM ubuntu:22.04
 # -----------------------------------
 LABEL \
     org.opencontainers.image.title="Docker Image of TeXLive" \
-    org.opencontainers.image.authors="ayaka-notes <public@ayaka.space>" \
-    org.opencontainers.image.source="https://github.com/ayaka-notes/texlive-full" \
+    org.opencontainers.image.authors="XeriChen <xeri_chen@163.com>" \
+    org.opencontainers.image.source="https://github.com/XeriChen/texlive-full" \
     org.opencontainers.image.licenses="MIT" \
-    org.opencontainers.image.description="Overleaf TeXLive Image by ayaka-notes"
+    org.opencontainers.image.description="Overleaf TeXLive Image by XeriChen"
 
 # Makes sure LuaTex cache is writable
 # -----------------------------------

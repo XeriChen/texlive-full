@@ -1,5 +1,5 @@
 # ---------------------------------------------
-# Overleaf TexLive 2023 (ayaka-notes/overleaf)
+# Overleaf TexLive 2023 (XeriChen/texlive-full)
 # ---------------------------------------------
 
 # Use base image, see texlive/base
@@ -10,10 +10,10 @@ FROM phusion/baseimage:jammy-1.0.1
 # -----------------------------------
 LABEL \
     org.opencontainers.image.title="Docker Image of TeXLive" \
-    org.opencontainers.image.authors="ayaka-notes <public@ayaka.space>" \
-    org.opencontainers.image.source="https://github.com/ayaka-notes/texlive-full" \
+    org.opencontainers.image.authors="XeriChen <xeri_chen@163.com>" \
+    org.opencontainers.image.source="https://github.com/XeriChen/texlive-full" \
     org.opencontainers.image.licenses="MIT" \
-    org.opencontainers.image.description="Overleaf TeXLive Image by ayaka-notes"
+    org.opencontainers.image.description="Overleaf TeXLive Image by XeriChen"
 
 # Makes sure LuaTex cache is writable
 # -----------------------------------

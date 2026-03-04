@@ -8,7 +8,7 @@ on:
 
 env:
   DOCKER_REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository_owner }}/texlive-full
+  IMAGE_NAME: ${{ tolower(github.repository_owner) }}/texlive-full
   IMAGE_TAG: base
 
 jobs:

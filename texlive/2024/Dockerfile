@@ -1,19 +1,19 @@
 # ---------------------------------------------
-# Overleaf TexLive 2024 (ayaka-notes/overleaf)
+# Overleaf TexLive 2024 (XeriChen/texlive-full)
 # ---------------------------------------------
 
 # Use base image, see texlive/base
 # -----------------------------------
-FROM ghcr.io/ayaka-notes/texlive-full:base
+FROM ghcr.io/XeriChen/texlive-full:base
 
 # LABEL
 # -----------------------------------
 LABEL \
     org.opencontainers.image.title="Docker Image of TeXLive" \
-    org.opencontainers.image.authors="ayaka-notes <public@ayaka.space>" \
-    org.opencontainers.image.source="https://github.com/ayaka-notes/texlive-full" \
+    org.opencontainers.image.authors="XeriChen <xeri_chen@163.com>" \
+    org.opencontainers.image.source="https://github.com/XeriChen/texlive-full" \
     org.opencontainers.image.licenses="MIT" \
-    org.opencontainers.image.description="Overleaf TeXLive Image by ayaka-notes"
+    org.opencontainers.image.description="Overleaf TeXLive Image by XeriChen"
 
 
 # Copy LatexMk... file 
