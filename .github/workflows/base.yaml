@@ -8,13 +8,15 @@ on:
 
 env:
   DOCKER_REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ tolower(github.repository_owner) }}/texlive-full
   IMAGE_TAG: base
 
 jobs:
   push-base-image:
     runs-on: ubuntu-latest
     steps:
+      - name: Set lowercase repository owner
+        run: |
+          echo "REPO_OWNER_LOWER=${GITHUB_REPOSITORY_OWNER,,}" >>${GITHUB_ENV}
 
       - name: 'Checkout GitHub Action'
         uses: actions/checkout@main
@@ -42,11 +44,15 @@ jobs:
             context: texlive/Base
             file: texlive/Base/Dockerfile
             push: true
-            tags: ${{ env.DOCKER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+            tags: ${{ env.DOCKER_REGISTRY }}/${{ env.REPO_OWNER_LOWER }}/texlive-full:${{ env.IMAGE_TAG }}
 
   push-slim-image:
     runs-on: ubuntu-latest
     steps:
+      - name: Set lowercase repository owner
+        run: |
+          echo "REPO_OWNER_LOWER=${GITHUB_REPOSITORY_OWNER,,}" >>${GITHUB_ENV}
+
       - name: 'Checkout GitHub Action'
         uses: actions/checkout@main
 
@@ -64,4 +70,4 @@ jobs:
             context: texlive/Slim
             file: texlive/Slim/Dockerfile
             push: true
-            tags: ${{ env.DOCKER_REGISTRY }}/${{ env.IMAGE_NAME }}:2024.1.slim
+            tags: ${{ env.DOCKER_REGISTRY }}/${{ env.REPO_OWNER_LOWER }}/texlive-full:2024.1.slim

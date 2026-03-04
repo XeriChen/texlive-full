@@ -21,7 +21,6 @@ on:
 
 env:
   DOCKER_REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ toLower(github.repository_owner) }}/texlive-full
 
 jobs:
   prepare:
@@ -69,6 +68,10 @@ jobs:
       matrix:
         tex-version: ${{ fromJson(needs.prepare.outputs.matrix) }}
     steps:
+      - name: Set lowercase repository owner
+        run: |
+          echo "REPO_OWNER_LOWER=${GITHUB_REPOSITORY_OWNER,,}" >>${GITHUB_ENV}
+
       - name: 'Checkout GitHub Action'
         uses: actions/checkout@main
 
@@ -86,4 +89,4 @@ jobs:
           context: texlive/${{ matrix.tex-version }}
           file: texlive/${{ matrix.tex-version }}/Dockerfile
           push: true
-          tags: ${{ env.DOCKER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ matrix.tex-version }}.1
+          tags: ${{ env.DOCKER_REGISTRY }}/${{ env.REPO_OWNER_LOWER }}/texlive-full:${{ matrix.tex-version }}.1
