@@ -2,6 +2,10 @@
 # Overleaf TexLive 2023 (XeriChen/texlive-full)
 # ---------------------------------------------
 
+# Build-time arguments
+# -----------------------------------
+ARG GITHUB_REPOSITORY_OWNER=XeriChen
+
 # Use base image, see texlive/base
 # -----------------------------------
 FROM phusion/baseimage:jammy-1.0.1
@@ -9,11 +13,11 @@ FROM phusion/baseimage:jammy-1.0.1
 # LABEL
 # -----------------------------------
 LABEL \
-    org.opencontainers.image.title="Docker Image of TeXLive" \
-    org.opencontainers.image.authors="XeriChen <xeri_chen@163.com>" \
-    org.opencontainers.image.source="https://github.com/XeriChen/texlive-full" \
+    org.opencontainers.image.title="Docker Image of TeXLive Slim" \
+    org.opencontainers.image.authors="${GITHUB_REPOSITORY_OWNER}" \
+    org.opencontainers.image.source="https://github.com/${GITHUB_REPOSITORY_OWNER}/texlive-full" \
     org.opencontainers.image.licenses="MIT" \
-    org.opencontainers.image.description="Overleaf TeXLive Image by XeriChen"
+    org.opencontainers.image.description="Overleaf TeXLive Slim Image"
 
 # Makes sure LuaTex cache is writable
 # -----------------------------------

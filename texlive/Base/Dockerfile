@@ -9,6 +9,10 @@
 # $ docker build -t ghcr.io/XeriChen/texlive-full:base ./texlive/Base
 # ---------------------------------------------
 
+# Build-time arguments
+# -----------------------------------
+ARG GITHUB_REPOSITORY_OWNER=XeriChen
+
 # This Dockerfile is used to build texlive-full:base
 # And texlive:2024, texlive:2023 and so on are all based on this
 # Base Image Contain fonts, apt-installed component
@@ -18,10 +22,10 @@ FROM ubuntu:22.04
 # -----------------------------------
 LABEL \
     org.opencontainers.image.title="Docker Image of TeXLive" \
-    org.opencontainers.image.authors="XeriChen <xeri_chen@163.com>" \
-    org.opencontainers.image.source="https://github.com/XeriChen/texlive-full" \
+    org.opencontainers.image.authors="${GITHUB_REPOSITORY_OWNER}" \
+    org.opencontainers.image.source="https://github.com/${GITHUB_REPOSITORY_OWNER}/texlive-full" \
     org.opencontainers.image.licenses="MIT" \
-    org.opencontainers.image.description="Overleaf TeXLive Image by XeriChen"
+    org.opencontainers.image.description="Overleaf TeXLive Base Image"
 
 # Makes sure LuaTex cache is writable
 # -----------------------------------

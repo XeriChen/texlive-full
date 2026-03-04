@@ -20,7 +20,6 @@ on:
 
 env:
   DOCKER_REGISTRY: registry.cn-hongkong.aliyuncs.com
-  IMAGE_NAME: ayaka-notes/texlive-full
 
 jobs:
   prepare:
@@ -67,6 +66,10 @@ jobs:
       matrix:
         tex-version: ${{ fromJson(needs.prepare.outputs.matrix) }}
     steps:
+      - name: Get lowercase repository owner
+        id: get_owner
+        uses: LucasRoesler/get-repo-owner-action@v1.0
+
       - name: 'Checkout GitHub Action'
         uses: actions/checkout@main
 
@@ -84,4 +87,5 @@ jobs:
           context: texlive/${{ matrix.tex-version }}
           file: texlive/${{ matrix.tex-version }}/Dockerfile
           push: true
-          tags: ${{ env.DOCKER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ matrix.tex-version }}.1
+          tags: ${{ env.DOCKER_REGISTRY }}/${{ steps.get_owner.outputs.owner }}/texlive-full:${{ matrix.tex-version }}.1
+          build-args: GITHUB_REPOSITORY_OWNER=${{ steps.get_owner.outputs.owner }}

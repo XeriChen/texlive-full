@@ -1,6 +1,10 @@
 # ---------------------------------------------
-# Overleaf TexLive 2020 (XeriChen/texlive-full)
+# Overleaf TexLive 2020 (texlive-full)
 # ---------------------------------------------
+
+# Build-time arguments
+# -----------------------------------
+ARG GITHUB_REPOSITORY_OWNER=XeriChen
 
 # Use base image, see texlive/base
 # -----------------------------------
@@ -10,10 +14,10 @@ FROM ghcr.io/xerichen/texlive-full:base
 # -----------------------------------
 LABEL \
     org.opencontainers.image.title="Docker Image of TeXLive" \
-    org.opencontainers.image.authors="XeriChen <xeri_chen@163.com>" \
-    org.opencontainers.image.source="https://github.com/XeriChen/texlive-full" \
+    org.opencontainers.image.authors="${GITHUB_REPOSITORY_OWNER}" \
+    org.opencontainers.image.source="https://github.com/${GITHUB_REPOSITORY_OWNER}/texlive-full" \
     org.opencontainers.image.licenses="MIT" \
-    org.opencontainers.image.description="Overleaf TeXLive Image by XeriChen"
+    org.opencontainers.image.description="Overleaf TeXLive Image"
 
 
 # Copy LatexMk run-chktex.sh file 
