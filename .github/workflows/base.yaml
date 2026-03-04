@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@main
         with:
           submodules: true
-          token: ${{ secrets.ORGTOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Update for Latest
         run: |
